@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, jsonify
 import time
 
 app = Flask(__name__)
@@ -9,4 +9,8 @@ def hello_world():
 
 @app.route('/time')
 def get_time():
-    return time.localtime()
+    ct = time.localtime()
+    sct = time.strftime('%Y-%m-%d %H:%M:%S', ct)
+    obj = {'current_time': sct}
+    return jsonify(obj)
+
